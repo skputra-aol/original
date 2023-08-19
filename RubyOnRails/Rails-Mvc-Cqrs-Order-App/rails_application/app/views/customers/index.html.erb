@@ -1,0 +1,43 @@
+<% content_for(:header) do %>
+  Customers
+<% end %>
+
+<% content_for(:actions) do %>
+  <%= primary_action_button do %>
+    <%= link_to 'New Customer', new_customer_path %>
+  <% end %>
+<% end %>
+
+<table class="w-full">
+  <thead>
+    <tr>
+      <th class="text-left py-2">Name</th>
+      <th class="text-center py-2">Vip</th>
+      <th class="text-right py-2">Paid oders summary</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @customers.each do |customer| %>
+    <tr class="border-t">
+
+        <td class="py-2"><%= customer.name %></td>
+        <td class="py-2 text-center">
+          <%- if customer.vip %>
+            Already a VIP
+          <%- else %>
+            <%= form_with(model: customer, url: customer_path(customer.id), id: "form#{customer.id}") do |form| %>
+              <%= action_button "border-transparent text-white bg-blue-600 hover:bg-blue-700", type: "submit",
+                                form: "form#{customer.id}" do %>
+                  Promote to Vip
+              <% end %>
+            <% end %>
+          <% end %>
+        </td>
+        <td class="py-2 text-right">
+          <%= number_to_currency(customer.paid_orders_summary) %>
+        </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

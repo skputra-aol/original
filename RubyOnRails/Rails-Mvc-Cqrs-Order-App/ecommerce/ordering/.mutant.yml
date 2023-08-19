@@ -1,0 +1,13 @@
+requires:
+  - ./test/test_helper
+integration: minitest
+coverage_criteria:
+  process_abort: true
+matcher:
+  subjects:
+    - Ordering*
+  ignore:
+    - Ordering::NumberGenerator*
+    - Ordering::Test*
+    - Ordering::Configuration#call
+    - Ordering::Configuration#initialize

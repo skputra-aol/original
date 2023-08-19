@@ -1,0 +1,40 @@
+source "https://rubygems.org"
+
+ruby ENV["HEROKU_RUBY_VERSION"] if ENV["HEROKU_RUBY_VERSION"]
+
+gem "rails", "7.0.4"
+gem "pg", "~> 1.4"
+gem "puma", "~> 5.6"
+gem "bootsnap", ">= 1.9.2", require: false
+gem "honeybadger", "~> 4.0"
+gem "skylight"
+gem "tailwindcss-rails"
+gem "kaminari"
+gem "sprockets-rails"
+gem "turbo-rails"
+gem "stimulus-rails"
+gem "importmap-rails", "~> 1.1"
+gem "rails_event_store",  ">= 2.9.0", "< 3.0"
+gem 'arbre'
+gem 'redis'
+gem 'activejob-uniqueness'
+gem "sidekiq", "~> 7.0"
+gem "ruby_event_store-sidekiq_scheduler", "~> 0.1.1"
+
+group :development do
+  gem "listen", "~> 3.3"
+end
+
+group :development, :test do
+  gem "byebug", platforms: %i[mri mingw x64_mingw]
+  gem "dotenv-rails"
+  gem "packwerk"
+end
+
+group :test do
+  eval_gemfile "../infra/Gemfile.test"
+end
+
+gem "infra", path: "../infra"
+
+gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
