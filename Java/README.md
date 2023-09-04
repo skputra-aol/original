@@ -1,2 +1,0 @@
-# original
-All Original Source
